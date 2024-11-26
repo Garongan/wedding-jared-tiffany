@@ -12,6 +12,15 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      animation: {
+        wiggle: 'wiggle 3s linear infinite',
+      },
+      keyframes: {
+        wiggle: {
+          '50%': { transform: 'translateY(-5px)' },
+          // '50%': { transform: 'rotate(3deg)' },
+        }
+      }
     },
   },
   plugins: [],

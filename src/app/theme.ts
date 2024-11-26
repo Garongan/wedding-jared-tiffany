@@ -12,5 +12,4 @@ export const theme = extendTheme({
         headingAlternative: fonts.poppins.style.fontFamily,
         body: fonts.newsReader.style.fontFamily,
     },
-
 });

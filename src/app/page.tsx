@@ -1,18 +1,25 @@
-'use client'
+"use client";
 
-import { Box, Flex, Stack, SlideFade } from "@chakra-ui/react";
-import { CustomHeading } from "./components/custom-heading";
-import { HeadingAlternative } from "./components/heading-alternative";
-import { CustomQuotes } from "./components/custom-quotes";
-import { CustomButton } from "./components/custom-button";
+import { Box, Flex, SlideFade, Stack } from "@chakra-ui/react";
 import { useState } from "react";
+import { CustomButton } from "./components/custom-button";
+import { CustomHeading } from "./components/custom-heading";
+import { CustomQuotes } from "./components/custom-quotes";
+import { HeadingAlternative } from "./components/heading-alternative";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   document.onreadystatechange = () => {
     setIsLoaded(document.readyState === "complete");
-}
+  };
+
+  const music = new Audio("/sound/bg-sound.mp3")
+
+  const startMusic = () => {
+    music.play()
+  }
 
   return (
     <Flex height='100%' width='100%'>
@@ -27,12 +34,16 @@ export default function Home() {
         borderRightColor='blackAlpha.400'
       >
         <Stack padding='42px' height='full'>
-          <SlideFade in={isLoaded} offsetY='20px'>
+          <SlideFade
+            in={isLoaded}
+            offsetY='20px'
+            transition={{ enter: { duration: 0.5 }, exit: { duration: 0.5 } }}
+          >
             <HeadingAlternative text='WEDDING ANNOUNCEMENT' />
           </SlideFade>
           <Box
             paddingTop='32px'
-            color='#fefefe'
+            color='alternativeColorText'
             textTransform='uppercase'
             letterSpacing='4px'
           >
@@ -48,12 +59,18 @@ export default function Home() {
               textTransform='uppercase'
               fontStyle='normal'
             />
-            <Box marginTop='10px'>
-              <CustomQuotes
-                text='"Aku ingin mencintaimu dengan sederhana; dengan kata yang tak sempat diucapkan kayu kepada api yang menjadikannya abu. Aku ingin mencintaimu dengan sederhana; dengan isyarat yang tak sempat disampaikan awan kepada hujan yang menjadikannya tiada."'
-                from='— Sapardi Djoko Damono'
-              />
-            </Box>
+            <SlideFade
+              in={isLoaded}
+              offsetY='30px'
+              transition={{ enter: { duration: 0.8 }, exit: { duration: 0.5 } }}
+            >
+              <Box marginTop='10px'>
+                <CustomQuotes
+                  text='"Aku ingin mencintaimu dengan sederhana; dengan kata yang tak sempat diucapkan kayu kepada api yang menjadikannya abu. Aku ingin mencintaimu dengan sederhana; dengan isyarat yang tak sempat disampaikan awan kepada hujan yang menjadikannya tiada."'
+                  from='— Sapardi Djoko Damono'
+                />
+              </Box>
+            </SlideFade>
           </Box>
         </Stack>
       </Box>
@@ -94,8 +111,13 @@ export default function Home() {
               textTransform='none'
               fontStyle='italic'
             />
-            <Box position='absolute' bottom='0' marginBottom='10vh'>
-              <CustomButton text='Open' />
+            <Box
+              className='animate-wiggle'
+              position='absolute'
+              bottom='0'
+              marginBottom='10vh'
+            >
+              <CustomButton text='Open' onClick={startMusic} />
             </Box>
           </Box>
         </Stack>
