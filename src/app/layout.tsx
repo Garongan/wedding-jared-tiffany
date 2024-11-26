@@ -15,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-        className='antialiased h-screen'
-      >
+      <body className='antialiased h-screen'>
         <Providers>{children}</Providers>
       </body>
     </html>

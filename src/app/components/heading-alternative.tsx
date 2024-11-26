@@ -1,5 +1,5 @@
-import { Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { Text } from '@chakra-ui/react';
+import { FC } from 'react';
 
 export const HeadingAlternative: FC<{ text: string }> = ({ text }) => {
   return (

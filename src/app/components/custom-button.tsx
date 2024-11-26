@@ -1,7 +1,11 @@
-import { Button } from "@chakra-ui/react";
-import { FC, MouseEventHandler } from "react";
+import { Button } from '@chakra-ui/react';
+import { FC, MouseEventHandler } from 'react';
 
-export const CustomButton: FC<{ text: string, onClick: MouseEventHandler<HTMLButtonElement> }> = ({ text, onClick }) => {
+export const CustomButton: FC<{
+  text: string;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  isLoading: boolean;
+}> = ({ text, onClick, isLoading }) => {
   return (
     <Button
       backgroundColor='bgSecondary'
@@ -14,6 +18,7 @@ export const CustomButton: FC<{ text: string, onClick: MouseEventHandler<HTMLBut
       fontWeight='normal'
       fontStyle='italic'
       onClick={onClick}
+      isLoading={isLoading}
     >
       {text}
     </Button>

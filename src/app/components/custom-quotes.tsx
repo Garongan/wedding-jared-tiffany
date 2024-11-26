@@ -1,5 +1,5 @@
-import { Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { Text } from '@chakra-ui/react';
+import { FC } from 'react';
 
 export const CustomQuotes: FC<{ text: string; from: string }> = ({
   text,

@@ -1,10 +1,10 @@
-import { Heading } from "@chakra-ui/react";
-import { FC } from "react";
+import { Heading } from '@chakra-ui/react';
+import { FC } from 'react';
 
 export const CustomHeading: FC<{
   text: string;
   fontSize: string;
-  textTransform: "capitalize" | "uppercase" | "lowercase" | "none";
+  textTransform: 'capitalize' | 'uppercase' | 'lowercase' | 'none';
   fontStyle: string;
 }> = ({ text, fontSize, textTransform, fontStyle }) => {
   return (
