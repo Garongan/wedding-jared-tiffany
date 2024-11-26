@@ -1,5 +1,5 @@
 {
-  "name": "invitato-test",
+  "name": "wedding-jared-tiffany",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "invitato-test": "file:",
+    "@chakra-ui/next-js": "^2.4.2",
+    "@chakra-ui/react": "^2.10.4",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "framer-motion": "^11.11.17",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "wedding-jared-tiffany": "file:"
   },
   "devDependencies": {
     "@types/node": "^20",
