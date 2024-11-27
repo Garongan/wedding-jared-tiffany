@@ -9,10 +9,38 @@ import { HeadingAlternative } from './components/heading-alternative';
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const ResponsiveSideBar = () => {
+    if (width > 1025) {
+      return (
+        <Box width='500px' overflow='scroll' display='flex' height='100vh'>
+          <CustomSidebar width='500px' />
+        </Box>
+      );
+    } else if (width > 426) {
+      return (
+        <Box
+          width='500px'
+          overflow='scroll'
+          className='mx-auto'
+          height='100vh'
+        >
+          <CustomSidebar width='500px' />
+        </Box>
+      );
+    } else {
+      return (
+        <Box width='100vw' overflow='scroll' display='flex' height='100vh'>
+          <CustomSidebar width='100vw' />
+        </Box>
+      );
+    }
+  };
 
   return (
     <Flex height='100%' width='100%'>
@@ -79,27 +107,7 @@ export default function Home() {
           </Stack>
         </Box>
       </Show>
-      <Show breakpoint='(min-width: 1025px)'>
-        <Box
-          width='500px'
-          overflow='scroll'
-          display='flex'
-          height='100vh'
-        >
-          <CustomSidebar />
-        </Box>
-      </Show>
-      <Show breakpoint='(max-width: 1024px)'>
-        <Box
-          width='500px'
-          overflow='scroll'
-          display='flex'
-          justifyContent='center'
-          height='100vh'
-        >
-          <CustomSidebar />
-        </Box>
-      </Show>
+      <ResponsiveSideBar />
     </Flex>
   );
 }

@@ -3,7 +3,7 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Box, Flex, SlideFade, Stack, Text } from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { CustomButton } from './custom-button';
 import { CustomHeading } from './custom-heading';
 import { HeadingAlternative } from './heading-alternative';
@@ -17,7 +17,7 @@ const slideShowImages = [
   'img/Slideshow-Cover-5.webp',
 ];
 
-export const CustomSidebar = () => {
+export const CustomSidebar: FC<{ width: string }> = ({ width }) => {
   const [isLoad, setIsLoad] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const [currentSlideShowImage, setCurrentSlideShowImage] = useState(0);
@@ -63,7 +63,7 @@ export const CustomSidebar = () => {
         background={
           'linear-gradient(rgba(50, 48, 48, 0.5), rgba(50, 48, 48, 0.5)), url(img/Cover.webp) center center / cover'
         }
-        width='500px'
+        width={width}
         height='100%'
       >
         <Stack padding='2rem' height='full'>
@@ -142,7 +142,7 @@ export const CustomSidebar = () => {
             exit={{ opacity: 0.5, y: '-200vh' }}
             transition='linear 0.5s'
             position='fixed'
-            width='500px'
+            width={width}
             height='100%'
           >
             <LandingContent />
@@ -159,12 +159,12 @@ export const CustomSidebar = () => {
           transition='ease-out 0.5s'
           position='relative'
         >
-          <Box height='100vh' width='500px'></Box>
+          <Box height='100vh' width={width}></Box>
           <Flex direction='column'>
             <Box
               overflow='hidden'
               height='100vh'
-              width='500px'
+              width={width}
               zIndex='10'
               backgroundColor='black'
             >
@@ -172,10 +172,10 @@ export const CustomSidebar = () => {
                 className='animate-scaleUpAndFade'
                 background={`linear-gradient(rgba(50, 48, 48, 0.5), rgba(50, 48, 48, 0.5)), url(${slideShowImages[currentSlideShowImage]}) center center / cover`}
                 height='100%'
-                width='500px'
+                width={width}
               />
             </Box>
-            <Box height='100vh' width='500px' position='absolute' zIndex='20'>
+            <Box height='100vh' width={width} position='absolute' zIndex='20'>
               <Stack padding='2rem' height='full'>
                 <Box
                   display='flex'
@@ -234,11 +234,7 @@ export const CustomSidebar = () => {
               </Stack>
             </Box>
             {/* message content */}
-            <Flex
-              direction='column'
-              ref={targetMessage}
-              alignItems='center'
-            >
+            <Flex direction='column' ref={targetMessage} alignItems='center'>
               <Box
                 padding='50px 0 100px'
                 display='flex'
@@ -294,7 +290,7 @@ export const CustomSidebar = () => {
                     joyfully announce the upcoming of our marriage.
                   </Text>
                 </SlideFade>
-                <Carousel />
+                <Carousel width={width} />
               </Box>
             </Flex>
           </Flex>

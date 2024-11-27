@@ -1,6 +1,6 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { Box, IconButton, Image } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
 const images = [
   'img/Slideshow-Cover-1.webp',
@@ -10,13 +10,9 @@ const images = [
   'img/Slideshow-Cover-5.webp',
 ];
 
-export const Carousel = () => {
-  const extendedImages = [
-    images[images.length - 1], 
-    ...images,
-    images[0], 
-  ];
-  const [currentIndex, setCurrentIndex] = useState(1); 
+export const Carousel: FC<{ width: string }> = ({ width }) => {
+  const extendedImages = [images[images.length - 1], ...images, images[0]];
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleNext = () => {
@@ -35,19 +31,19 @@ export const Carousel = () => {
     const timer = setTimeout(() => {
       setIsTransitioning(false);
       if (currentIndex === 0) {
-        setCurrentIndex(images.length); 
+        setCurrentIndex(images.length);
       } else if (currentIndex === extendedImages.length - 1) {
-        setCurrentIndex(1); 
+        setCurrentIndex(1);
       }
-    }, 500); 
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [currentIndex, extendedImages.length]);
 
   return (
-    <Box position="relative" width="500px">
+    <Box position='relative' width={width}>
       <Box
-        display="flex"
+        display='flex'
         transition={isTransitioning ? 'transform 0.5s ease-in-out' : 'none'}
         transform={`translateX(calc(-${currentIndex} * 280px + 110px))`}
         width={`${extendedImages.length * 280}px`}
@@ -55,13 +51,13 @@ export const Carousel = () => {
         {extendedImages.map((src, index) => (
           <Image
             alt={index.toString()}
-            objectFit="cover"
+            objectFit='cover'
             src={src}
             key={index}
-            height="390px"
-            width="280px"
-            borderWidth="10px"
-            borderStyle="solid"
+            height='390px'
+            width='280px'
+            borderWidth='10px'
+            borderStyle='solid'
             borderColor='transparent'
             className={`${
               index === currentIndex ? 'scale-105' : 'scale-100'
