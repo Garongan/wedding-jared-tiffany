@@ -13,12 +13,19 @@ export default {
         foreground: "var(--foreground)",
       },
       animation: {
-        wiggle: 'wiggle 3s linear infinite',
+        moveUpDown: 'moveUpDown 3s linear infinite',
+        scaleUpAndFade: 'scaleUpAndFade 5s linear infinite',
       },
       keyframes: {
-        wiggle: {
+        moveUpDown: {
           '50%': { transform: 'translateY(-5px)' },
-          // '50%': { transform: 'rotate(3deg)' },
+        },
+        scaleUpAndFade: {
+          '0%' : {transform: 'scale(1)', opacity: '0'},
+          '5%' : {transform: 'scale(1.005)', opacity: '1'},
+          '50%' : {transform: 'scale(1.05)', opacity: '1'},
+          '95%' : {transform: 'scale(1.095)', opacity: '1'},
+          '100%' : {transform: 'scale(1.1)', filter: 'brightness(0.9)', opacity: '0'}
         }
       }
     },
