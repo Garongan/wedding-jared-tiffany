@@ -25,6 +25,7 @@ export const CustomButton: FC<{
       onClick={onClick}
       isLoading={isLoading}
       rightIcon={rightIcon ?? null}
+      _focus={{ backgroundColor: 'transparent' }}
     >
       {text}
     </Button>

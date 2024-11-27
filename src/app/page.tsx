@@ -32,7 +32,11 @@ export default function Home() {
             offsetY='20px'
             transition={{ enter: { duration: 0.5 }, exit: { duration: 0.5 } }}
           >
-            <HeadingAlternative text='WEDDING ANNOUNCEMENT' />
+            <HeadingAlternative
+              text='WEDDING ANNOUNCEMENT'
+              color='alternativeColorText'
+              fontSize='md'
+            />
           </SlideFade>
           <Box
             paddingTop='32px'
@@ -45,12 +49,18 @@ export default function Home() {
               fontSize='7xl'
               textTransform='uppercase'
               fontStyle='normal'
+              fontWeight='light'
+              color='alternativeColorText'
+              lineHeight='1'
             />
             <CustomHeading
               text='JARED'
               fontSize='7xl'
               textTransform='uppercase'
               fontStyle='normal'
+              fontWeight='light'
+              color='alternativeColorText'
+              lineHeight='1'
             />
           </Box>
           <SlideFade
@@ -67,7 +77,7 @@ export default function Home() {
           </SlideFade>
         </Stack>
       </Box>
-      <Box width='500px'>
+      <Box width='500px' overflow='scroll' height='100vh'>
         <CustomSidebar />
       </Box>
     </Flex>

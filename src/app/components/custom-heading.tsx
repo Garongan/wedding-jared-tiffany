@@ -4,21 +4,32 @@ import { FC } from 'react';
 export const CustomHeading: FC<{
   text: string;
   fontSize: string;
+  fontWeight:
+    | 'normal'
+    | 'medium'
+    | 'black'
+    | 'thin'
+    | 'hairline'
+    | 'light'
+    | 'semibold'
+    | 'extrabold';
   textTransform: 'capitalize' | 'uppercase' | 'lowercase' | 'none';
   fontStyle: string;
-}> = ({ text, fontSize, textTransform, fontStyle }) => {
+  color: string;
+  lineHeight: string
+}> = ({ text, fontSize, textTransform, fontStyle, fontWeight, color,lineHeight }) => {
   return (
     <Heading
       as='h2'
-      lineHeight='1'
+      lineHeight={lineHeight}
       fontFamily='heading'
-      fontWeight='light'
-      color='alternativeColorText'
+      fontWeight={fontWeight}
+      color={color}
       fontSize={fontSize}
       textTransform={textTransform}
       fontStyle={fontStyle}
+      dangerouslySetInnerHTML={{ __html: text }}
     >
-      {text}
     </Heading>
   );
 };

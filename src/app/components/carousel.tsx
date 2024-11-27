@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { Box, IconButton, Image } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const images = [
   'img/Slideshow-Cover-1.webp',
@@ -11,48 +11,73 @@ const images = [
 ];
 
 export const Carousel = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Ganti gambar setiap 3 detik
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
-    return () => clearInterval(interval);
-  }, []);
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
+
   return (
-    <Box
-      position='relative'
-      width='500px'
-      height='100vh'
-      overflow='visible'
-    >
-      <AnimatePresence>
-        {images.map(
-          (src, index) =>
-            index === currentImageIndex && (
-              <Box
-                as={motion.div}
-                key={src}
-                initial={{ scale: 1, opacity: 0.9 }}
-                animate={{ scale: 1.1, opacity: 1 }}
-                exit={{ scale: 1.5, opacity: 0.8 }}
-                transition='linear 1.5s'
-                style={{
-                //   position: 'absolute',
-                //   top: 0,
-                //   left: 0,
-                  width: '500px',
-                  height: '100%',
-                  backgroundImage: `url(${src})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              />
-            )
-        )}
-      </AnimatePresence>
+    <Box position='relative' width='500px'>
+      <Box
+        display='flex'
+        transition='transform 0.5s ease-in-out'
+        transform={`translateX(-${currentIndex * 280}px)`}
+        width='500px'
+      >
+        {images.map((src, index) => (
+          <Image
+            alt={index.toString()}
+            objectFit='cover'
+            objectPosition='center'
+            src={src}
+            key={index}
+            height='390px'
+            width='280px'
+            borderWidth='10px'
+            borderStyle='solid'
+            borderColor='transparent'
+            className={`${index === currentIndex ? 'scale-105' : 'scale-100'} transition-all duration-300`}
+          />
+        ))}
+      </Box>
+
+      <IconButton
+        aria-label='Previous Slide'
+        icon={<ArrowBackIcon />}
+        onClick={handlePrev}
+        size='lg'
+        variant='outline'
+        position='absolute'
+        height='30px'
+        width='70px'
+        right='120px'
+        bottom='-50px'
+        alignSelf='center'
+        border='1px solid rgb(26, 27, 29)'
+        backgroundColor='bgSecondary'
+      />
+      <IconButton
+        aria-label='Next Slide'
+        icon={<ArrowForwardIcon />}
+        onClick={handleNext}
+        size='lg'
+        variant='outline'
+        position='absolute'
+        height='30px'
+        width='70px'
+        right='2.5rem'
+        bottom='-50px'
+        alignSelf='center'
+        border='1px solid rgb(26, 27, 29)'
+        backgroundColor='bgSecondary'
+      />
     </Box>
   );
 };

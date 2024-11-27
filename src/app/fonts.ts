@@ -13,9 +13,16 @@ const newsReader = localFont({
 })
 
 const butler = localFont({
-    src: './fonts/Butler_Light.otf',
-    weight: '300',
-    variable: '--fonts-butler'
+    src: [
+        {
+            path: './fonts/Butler_Light.otf',
+            weight: '300',
+        },
+        {
+            path: './fonts/Butler_Medium.otf',
+            weight: '500',
+        }
+    ]
 })
 
 export const fonts = {
