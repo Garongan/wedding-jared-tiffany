@@ -9,9 +9,10 @@ import { HeadingAlternative } from './components/heading-alternative';
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
+    setWidth(window.innerWidth);
     setIsLoaded(true);
   }, []);
 
@@ -24,12 +25,7 @@ export default function Home() {
       );
     } else if (width > 426) {
       return (
-        <Box
-          width='500px'
-          overflow='scroll'
-          className='mx-auto'
-          height='100vh'
-        >
+        <Box width='500px' overflow='scroll' className='mx-auto' height='100vh'>
           <CustomSidebar width='500px' />
         </Box>
       );
