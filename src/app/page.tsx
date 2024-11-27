@@ -79,8 +79,24 @@ export default function Home() {
           </Stack>
         </Box>
       </Show>
-      <Show breakpoint='(min-width: 1024px'>
-        <Box width='500px' overflow='scroll' display='flex' justifyContent='center' height='100vh'>
+      <Show breakpoint='(min-width: 1025px)'>
+        <Box
+          width='500px'
+          overflow='scroll'
+          display='flex'
+          height='100vh'
+        >
+          <CustomSidebar />
+        </Box>
+      </Show>
+      <Show breakpoint='(max-width: 1024px)'>
+        <Box
+          width='500px'
+          overflow='scroll'
+          display='flex'
+          justifyContent='center'
+          height='100vh'
+        >
           <CustomSidebar />
         </Box>
       </Show>
