@@ -1,6 +1,6 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { Box, IconButton, Image } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const images = [
   'img/Slideshow-Cover-1.webp',
@@ -11,39 +11,61 @@ const images = [
 ];
 
 export const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const extendedImages = [
+    images[images.length - 1], 
+    ...images,
+    images[0], 
+  ];
+  const [currentIndex, setCurrentIndex] = useState(1); 
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   };
 
   const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+      if (currentIndex === 0) {
+        setCurrentIndex(images.length); 
+      } else if (currentIndex === extendedImages.length - 1) {
+        setCurrentIndex(1); 
+      }
+    }, 500); 
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, extendedImages.length]);
+
   return (
-    <Box position='relative' width='500px'>
+    <Box position="relative" width="500px">
       <Box
-        display='flex'
-        transition='transform 0.5s ease-in-out'
-        transform={`translateX(-${currentIndex * 280}px)`}
-        width='500px'
+        display="flex"
+        transition={isTransitioning ? 'transform 0.5s ease-in-out' : 'none'}
+        transform={`translateX(calc(-${currentIndex} * 280px + 110px))`}
+        width={`${extendedImages.length * 280}px`}
       >
-        {images.map((src, index) => (
+        {extendedImages.map((src, index) => (
           <Image
             alt={index.toString()}
-            objectFit='cover'
-            objectPosition='center'
+            objectFit="cover"
             src={src}
             key={index}
-            height='390px'
-            width='280px'
-            borderWidth='10px'
-            borderStyle='solid'
+            height="390px"
+            width="280px"
+            borderWidth="10px"
+            borderStyle="solid"
             borderColor='transparent'
-            className={`${index === currentIndex ? 'scale-105' : 'scale-100'} transition-all duration-300`}
+            className={`${
+              index === currentIndex ? 'scale-105' : 'scale-100'
+            } transition-all duration-300`}
           />
         ))}
       </Box>
